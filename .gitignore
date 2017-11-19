@@ -1,0 +1,8 @@
+# /
+*.suo
+#*.o
+*.stackdump
+/.git
+
+/rubic/*
+/OLD_project/*
