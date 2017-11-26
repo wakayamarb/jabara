@@ -5,5 +5,5 @@ https://github.com/wdnst/wrbb-v2lib-firm/tree/develop3
 
 
 GR-CITRUSとRaspberry Pi用のAdafruit製のタッチLCDボード「PiTFT 2.8 Capacitive Touchscreen」のインターフェイス基板です。
-GR-CITRUS用の拡張クラスライブラリのソースは以下のリポジトリに、wdnstさんが公開されています。
+GR-CITRUS用の拡張クラスライブラリのソースは以下のリポジトリに、wdnst さんが公開されています。
 https://github.com/wdnst/wrbb-v2lib-firm/tree/develop3
