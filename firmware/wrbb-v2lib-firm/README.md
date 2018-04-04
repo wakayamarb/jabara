@@ -19,12 +19,14 @@ sample フォルダ内にあるサンプルに関しては、develop版で動作
   mruby ver1.1.0 -> ByteCode Format Ver.0003  
   mruby ver1.2.0 -> ByteCode Format Ver.0003  
 
-    WAKAYAMA.RB Board Ver.ARIDA5-1.52(2016/3/19)f3(256KB), mruby 1.2.0
-                            |      |      |      |   |
-                            |      |      |      |   |
-                            |      |      |      |  RAM Size
+    WAKAYAMA.RB Board Ver.ARIDA5-1.52(2016/3/19),TFTc-1.01,f3(256KB), mruby 1.2.0
+                            |      |      |      |         |   |
+                            |      |      |      |         |   |
+                            |      |      |      |         |  RAM Size
+                            |      |      |      |         |
+                            |      |      |      |      ByteCode Format Number
                             |      |      |      |
-                            |      |      |   ByteCode Format Number
+                            |      |      |      TFTc Firmware Version
                             |      |      |
                             |      |    作成日
                             |      |
@@ -32,11 +34,18 @@ sample フォルダ内にあるサンプルに関しては、develop版で動作
                             |
                        回路基板種類
 
-
 How to use Wakayama.rb board
 ------
 https://github.com/wakayamarb/wrbb-v2lib-firm/tree/master/firmware_release/description/Ruby%20Firmware%20on%20GR-CITRUS.pdf
 http://www.slideshare.net/MinaoYamamoto/grcitrusruby
+
+How to build firmware
+------
+  本ファームウェアは下記に示すAdafruit のライブラリを組み込んでいます。  
+　[adafruit/Adafruit-GFX-Library v1.1.5](https://github.com/adafruit/Adafruit-GFX-Library/releases/tag/v1.1.5)  
+　[adafruit/Adafruit_ILI9341 v1.0.2](https://github.com/adafruit/Adafruit_ILI9341/releases/tag/1.0.2)  
+　[Adafruit_FT6206_Library v1.0.0](https://github.com/adafruit/Adafruit_FT6206_Library/releases/tag/1.0.0)  
+  ライブラリをダウンロードし、firmware_release/TFTc 以下のフォルダにソースコードを配置したうえでpatchをあててください。また、必要に応じて firmware_release/TFTc/GFX/Fonts フォルダにフォントファイルを配置してください。
 
 Link
 ------

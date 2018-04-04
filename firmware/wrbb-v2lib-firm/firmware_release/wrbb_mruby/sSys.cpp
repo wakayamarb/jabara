@@ -25,6 +25,7 @@
 #if BOARD == BOARD_GR || FIRMWARE == SDBT || FIRMWARE == SDWF || BOARD == BOARD_P05 || BOARD == BOARD_P06
 	#include "sSdCard.h"
 	#include "sWiFi.h"
+	#include "sTFTc.h"
 #endif
 
 #if BOARD == BOARD_GR || FIRMWARE == SDBT || FIRMWARE == SDWF || BOARD == BOARD_P05 || (BOARD == BOARD_P06 && FIRMWARE == CITRUS)
@@ -271,6 +272,52 @@ mrb_value mrb_system_useMp3(mrb_state *mrb, mrb_value self)
 }
 
 //**************************************************
+//  Adafruit TFT 2.8'' Touchpanel Capacitive Shield 
+//  を使えるようにします
+//**************************************************
+mrb_value Is_useTFTc(mrb_state *mrb, mrb_value self, int mode)
+{
+int ret = 0;
+
+#if FIRMWARE == SDWF || BOARD == BOARD_P05 || BOARD == BOARD_P06
+	ret = TFTc_Init(mrb);		//Adafruit TFT 2.8'' Touchpanel Capacitive Shield 関連メソッドの設定
+#endif
+
+	//return mrb_fixnum_value( ret );
+	return (mode == 0?mrb_fixnum_value(ret):mrb_bool_value(ret == 1));
+}
+//**************************************************
+//  Adafruit TFT 2.8'' Touchpanel Capacitive Shield 
+//  を使えるようにします: System.useTFTc
+// System.useTFTc()
+//戻り値
+// 0:使用不可, 1:使用可能
+//**************************************************
+mrb_value mrb_system_useTFTc(mrb_state *mrb, mrb_value self)
+{
+	return Is_useTFTc(mrb, self, 0);
+}
+
+//**************************************************
+//  Adafruit TFT 2.8'' Touchpanel Capacitive Shield 
+//  のインスタンスを解放します: System.clrTFTc
+// System.clrTFTc()
+//戻り値
+// 0: 削除不可 , 1 : 削除済
+//**************************************************
+mrb_value mrb_system_clrTFTc(mrb_state *mrb, mrb_value self)
+{
+int ret = 0;
+
+#if FIRMWARE == SDWF || BOARD == BOARD_P05 || BOARD == BOARD_P06
+	ret = TFTc_Clear(mrb);		//Adafruit TFT 2.8'' Touchpanel Capacitive Shield 関連インスタンスの開放
+#endif
+
+	return mrb_fixnum_value( ret );
+}
+
+
+//**************************************************
 // useで指定したクラスを使用できるようにします
 //**************************************************
 mrb_value Is_use(mrb_state *mrb, mrb_value self, int mode)
@@ -297,6 +344,14 @@ int ret = 0;
 		}
 		else{
 			return Is_useWiFi(mrb, self, 1);
+		}
+	}
+	else if(strcmp(strName, "TFTc" ) == 0){
+		if(mode == 0){
+			return Is_useTFTc(mrb, self, 0);
+		}
+		else{
+			return Is_useTFTc(mrb, self, 1);
 		}
 	}
 #if BOARD == BOARD_GR || FIRMWARE == SDBT || FIRMWARE == SDWF || BOARD == BOARD_P05 || (BOARD == BOARD_P06 && FIRMWARE == CITRUS)
@@ -371,6 +426,8 @@ void sys_Init(mrb_state *mrb)
 	mrb_define_module_function(mrb, systemModule, "useSD", mrb_system_useSD, MRB_ARGS_NONE());
 	mrb_define_module_function(mrb, systemModule, "useWiFi", mrb_system_useWiFi, MRB_ARGS_NONE());
 	mrb_define_module_function(mrb, systemModule, "useMP3", mrb_system_useMp3, MRB_ARGS_OPT(2));
+	mrb_define_module_function(mrb, systemModule, "useTFTc", mrb_system_useTFTc, MRB_ARGS_NONE());
+	mrb_define_module_function(mrb, systemModule, "clrTFTc", mrb_system_clrTFTc, MRB_ARGS_NONE());
 
 	mrb_define_module_function(mrb, systemModule, "use", mrb_system_use,  MRB_ARGS_REQ(1)|MRB_ARGS_OPT(1));
 	mrb_define_module_function(mrb, systemModule, "use?", mrb_system_use_p,  MRB_ARGS_REQ(1)|MRB_ARGS_OPT(1));

@@ -1,0 +1,12 @@
+--- ../../../../original/TFT/Adafruit_ILI9341.h	Mon Apr  2 04:08:28 2018
++++ Adafruit_ILI9341.h	Sun Feb 25 02:15:00 2018
+@@ -28,6 +28,9 @@
+ #elif defined(ESP8266)
+   #include <pgmspace.h>
+ #endif
++#ifdef GRCITRUS
++  #include <avr/pgmspace.h>
++#endif
+ 
+ #ifdef ARDUINO_STM32_FEATHER
+ typedef volatile uint32 RwReg;

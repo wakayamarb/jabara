@@ -1,0 +1,13 @@
+--- ../../../../original/TFT/Adafruit_FT6206.cpp	Mon Apr  2 04:08:45 2018
++++ Adafruit_FT6206.cpp	Sun Feb 25 03:30:33 2018
+@@ -29,6 +29,10 @@
+     #define Wire Wire1
+ #endif
+ 
++#if defined(GRCITRUS)
++    #define Wire Wire1
++#endif
++
+ /**************************************************************************/
+ /*! 
+     @brief  Instantiates a new FT6206 class

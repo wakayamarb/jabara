@@ -1,0 +1,15 @@
+--- ../../../../orignal/GFX/Adafruit_GFX.cpp	Mon Apr  2 04:07:16 2018
++++ Adafruit_GFX.cpp	Sun Feb 25 02:17:40 2018
+@@ -36,6 +36,11 @@
+ #elif defined(ESP8266)
+  #include <pgmspace.h>
+ #endif
++
++#ifdef GRCITRUS
++  #include <avr/pgmspace.h>
++#endif
++
+ #include "Adafruit_GFX.h"
+ #include "glcdfont.c"
+ 
+

@@ -1,0 +1,63 @@
+--- ../../../../original/TFT/spitftbitmap.ino	Mon Apr  2 04:34:09 2018
++++ spitftbitmap.ino	Tue Mar 27 08:59:01 2018
+@@ -13,7 +13,7 @@
+   MIT license, all text above must be included in any redistribution
+  ****************************************************/
+ 
+-
++/***
+ #include <Adafruit_GFX.h>    // Core graphics library
+ #include "Adafruit_ILI9341.h" // Hardware-specific library
+ #include <SPI.h>
+@@ -49,7 +49,7 @@
+ 
+ void loop() {
+ }
+-
++***/
+ // This function opens a Windows Bitmap (BMP) file and
+ // displays it at the given coordinates.  It's sped up
+ // by reading many pixels worth of data at a time
+@@ -57,7 +57,8 @@
+ // size takes more of the Arduino's precious RAM but
+ // makes loading a little faster.  20 pixels seems a
+ // good balance.
+-
++uint16_t read16(File &);    //wdn
++uint32_t read32(File &);    //wdn
+ #define BUFFPIXEL 20
+ 
+ void bmpDraw(char *filename, uint8_t x, uint16_t y) {
+@@ -75,7 +76,7 @@
+   uint8_t  r, g, b;
+   uint32_t pos = 0, startTime = millis();
+ 
+-  if((x >= tft.width()) || (y >= tft.height())) return;
++  if((x >= tft->width()) || (y >= tft->height())) return;   //wdn tft. to tft->
+ 
+   Serial.println();
+   Serial.print(F("Loading image '"));
+@@ -122,11 +123,11 @@
+         // Crop area to be loaded
+         w = bmpWidth;
+         h = bmpHeight;
+-        if((x+w-1) >= tft.width())  w = tft.width()  - x;
+-        if((y+h-1) >= tft.height()) h = tft.height() - y;
++        if((x+w-1) >= tft->width())  w = tft->width()  - x; //wdn tft. to tft->
++        if((y+h-1) >= tft->height()) h = tft->height() - y; //wdn tft. to tft->
+ 
+         // Set TFT address window to clipped image bounds
+-        tft.setAddrWindow(x, y, x+w-1, y+h-1);
++        tft->setAddrWindow(x, y, x+w-1, y+h-1); //wdn tft. to tft->
+ 
+         for (row=0; row<h; row++) { // For each scanline...
+ 
+@@ -156,7 +157,7 @@
+             b = sdbuffer[buffidx++];
+             g = sdbuffer[buffidx++];
+             r = sdbuffer[buffidx++];
+-            tft.pushColor(tft.color565(r,g,b));
++            tft->pushColor(tft->color565(r,g,b));  //wdn tft. to tft->
+           } // end pixel
+         } // end scanline
+         Serial.print(F("Loaded in "));

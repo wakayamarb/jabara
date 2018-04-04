@@ -1,0 +1,24 @@
+--- ../../../../original/TFT/Adafruit_ILI9341.cpp	Mon Apr  2 04:08:28 2018
++++ Adafruit_ILI9341.cpp	Sun Feb 25 03:32:55 2018
+@@ -20,6 +20,10 @@
+   #include <pgmspace.h>
+ #endif
+ 
++#ifdef GRCITRUS
++  #include <avr/pgmspace.h>
++#endif
++
+ #ifndef ARDUINO_STM32_FEATHER
+   #include "pins_arduino.h"
+   #include "wiring_private.h"
+@@ -95,7 +99,9 @@
+     SPI.transfer(c);
+ #endif
+   } else {
+-#if defined(ESP8266) || defined (ARDUINO_ARCH_ARC32)
++// [todo] Must imprement for GRCITRUS
++//#if defined(ESP8266) || defined (ARDUINO_ARCH_ARC32)
++#if defined(ESP8266) || defined (ARDUINO_ARCH_ARC32) || defined (GRCITRUS)
+     for(uint8_t bit = 0x80; bit; bit >>= 1) {
+       if(c & bit) {
+ 	digitalWrite(_mosi, HIGH); 
