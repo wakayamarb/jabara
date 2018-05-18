@@ -6,5 +6,5 @@
     "en": "This is 'PiTFT 2.8 Capacitive Touchscreen' library for GR-CITRUS. PiTFT is a touch LCD board made by Adafruit for Raspberry Pi.",
     "ja": "GR-CITRUSの「PiTFT 2.8 Capacitive Touchscreen」ライブラリです。PiTFTはRaspberry Pi用のAdafruit製のタッチLCDボードです。"
   },
-  "preview": true
+  "preview": false
 }
